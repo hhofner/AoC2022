@@ -58,3 +58,13 @@ stream
 |> Enum.map(fn elf -> Enum.sum(Enum.map(elf, fn calorie -> String.to_integer(calorie) end)) end)
 |> Enum.max()
 |> IO.puts()
+
+stream
+|> Enum.map(fn line -> String.replace(line, "\n", "") end)
+|> Enum.chunk_by(fn x -> x != "" end)
+|> Enum.reject(fn x -> x == [""] end)
+|> Enum.map(fn elf -> Enum.sum(Enum.map(elf, fn calorie -> String.to_integer(calorie) end)) end)
+|> Enum.sort()
+|> Enum.slice(-3..-1)
+|> Enum.sum()
+|> IO.puts()
